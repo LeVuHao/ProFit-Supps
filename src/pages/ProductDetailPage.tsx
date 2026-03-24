@@ -6,6 +6,11 @@ import { formatCurrency, getProductById, products } from "../data/products";
 export default function ProductDetailPage() {
   const { id } = useParams();
   const product = getProductById(id);
+  const hasImagePath = Boolean(
+    product?.image &&
+    (product.image.includes("/") ||
+      /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(product.image)),
+  );
 
   if (!product) {
     return (
@@ -40,8 +45,16 @@ export default function ProductDetailPage() {
       </p>
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1fr]">
         <div className="rounded-[28px] border border-zinc-200 bg-white p-8 shadow-sm">
-          <div className="flex min-h-[420px] items-center justify-center rounded-2xl bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 text-7xl font-bold tracking-[0.22em] text-zinc-400">
-            {product.image}
+          <div className="flex min-h-[420px] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 text-7xl font-bold tracking-[0.22em] text-zinc-400">
+            {hasImagePath ? (
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              product.image
+            )}
           </div>
         </div>
         <div className="space-y-5 rounded-[28px] border border-zinc-200 bg-white p-8 shadow-sm">

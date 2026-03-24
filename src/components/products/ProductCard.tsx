@@ -7,6 +7,10 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const hasImagePath =
+    product.image.includes("/") ||
+    /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(product.image);
+
   return (
     <Link
       className="group block translate-y-0 scale-100 transform-gpu overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-[5px] hover:scale-[1.05] hover:shadow-[0_22px_50px_rgba(15,23,42,0.14)] motion-reduce:transform-none"
@@ -18,8 +22,19 @@ export default function ProductCard({ product }: ProductCardProps) {
             -{product.discount}%
           </span>
         ) : null}
-        <div className="flex h-44 items-center justify-center rounded-xl bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 text-4xl font-bold tracking-[0.2em] text-zinc-400 transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:transform-none">
-          {product.image}
+        <div className="flex h-44 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:transform-none">
+          {hasImagePath ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <span className="text-4xl font-bold tracking-[0.2em] text-zinc-400">
+              {product.image}
+            </span>
+          )}
         </div>
       </div>
       <div className="space-y-3 p-4">

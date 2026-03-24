@@ -35,8 +35,8 @@ export default function HeroBanner() {
             Stronger Every Day. Premium Fuel For Your Performance.
           </h1>
           <p className="max-w-xl text-sm leading-7 text-zinc-200 md:text-base">
-            Curated supplements, fitness essentials, and lifestyle picks in one
-            polished storefront experience built entirely with frontend code.
+            Curated whey formulas, performance stacks, and recovery nutrition
+            built for strength training and daily athletic progress.
           </p>
           <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-100 md:text-sm">
             <span className="rounded-full border border-white/20 bg-white/10 px-3 py-2">
@@ -52,7 +52,7 @@ export default function HeroBanner() {
           <div className="flex flex-wrap items-center gap-4">
             <Link
               className="inline-flex transform-gpu items-center rounded-xl bg-orange-500 px-5 py-3 text-sm font-bold text-white shadow-[0_15px_35px_rgba(249,115,22,0.35)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:scale-[1.04] hover:bg-orange-400 motion-reduce:transform-none"
-              to="/category/electronics"
+              to="/category/whey-isolate"
             >
               Shop collection
             </Link>

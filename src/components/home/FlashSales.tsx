@@ -22,7 +22,7 @@ export default function FlashSales() {
       <div className="mt-8 text-center">
         <Link
           className="inline-flex rounded-md bg-[#db4444] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c83838]"
-          to="/category/electronics"
+          to="/category/whey-concentrate"
         >
           View all products
         </Link>

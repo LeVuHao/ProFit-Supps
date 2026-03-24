@@ -75,15 +75,15 @@ export default function Footer() {
           </Link>
           <Link
             className="block transition-colors hover:text-orange-300"
-            to="/category/electronics"
+            to="/category/whey-isolate"
           >
-            Electronics
+            Whey Isolate
           </Link>
           <Link
             className="block transition-colors hover:text-orange-300"
-            to="/category/home-lifestyle"
+            to="/category/recovery-performance"
           >
-            Home & Lifestyle
+            Recovery Stack
           </Link>
         </div>
 

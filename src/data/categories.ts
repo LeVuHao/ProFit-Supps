@@ -8,47 +8,48 @@ export type Category = {
 
 export const categories: Category[] = [
   {
-    slug: "womens-fashion",
-    name: "Women's Fashion",
+    slug: "whey-concentrate",
+    name: "Whey Concentrate",
     description:
-      "Statement pieces, wardrobe staples, and refined everyday looks.",
-    hero: "Modern silhouettes with elevated essentials.",
-    accent: "from-rose-100 to-orange-50",
-  },
-  {
-    slug: "mens-fashion",
-    name: "Men's Fashion",
-    description: "Tailored layers, clean lines, and off-duty essentials.",
-    hero: "Confident fits for daily wear.",
-    accent: "from-slate-100 to-zinc-50",
-  },
-  {
-    slug: "electronics",
-    name: "Electronics",
-    description: "Performance gear, audio, mobile, and desk-ready upgrades.",
-    hero: "Smart tech built for work and play.",
-    accent: "from-cyan-100 to-blue-50",
-  },
-  {
-    slug: "home-lifestyle",
-    name: "Home & Lifestyle",
-    description: "Furniture, decor, and useful upgrades for calm interiors.",
-    hero: "Design-forward comfort for every corner.",
+      "Balanced protein blend for daily use, taste, and recovery support.",
+    hero: "Great value formula for steady muscle nutrition.",
     accent: "from-amber-100 to-orange-50",
   },
   {
-    slug: "sports-outdoor",
-    name: "Sports & Outdoor",
-    description: "Training, recovery, movement, and adventure basics.",
-    hero: "Move well, outdoors and in.",
+    slug: "whey-isolate",
+    name: "Whey Isolate",
+    description: "High-purity protein with lower carbs, fats, and lactose.",
+    hero: "Lean protein choice for cutting phases and clean macros.",
+    accent: "from-sky-100 to-cyan-50",
+  },
+  {
+    slug: "hydrolyzed-whey",
+    name: "Hydrolyzed Whey",
+    description:
+      "Pre-digested whey peptides for faster absorption after training.",
+    hero: "Advanced recovery support for high-frequency athletes.",
+    accent: "from-teal-100 to-emerald-50",
+  },
+  {
+    slug: "mass-gainer",
+    name: "Mass Gainer",
+    description: "High-calorie protein-carb blends to increase total intake.",
+    hero: "Built for hard gainers and bulking cycles.",
+    accent: "from-rose-100 to-orange-50",
+  },
+  {
+    slug: "plant-protein",
+    name: "Plant Protein",
+    description: "Dairy-free blends from pea, rice, and pumpkin proteins.",
+    hero: "Smooth vegan protein options for sensitive digestion.",
     accent: "from-lime-100 to-emerald-50",
   },
   {
-    slug: "health-beauty",
-    name: "Health & Beauty",
+    slug: "recovery-performance",
+    name: "Recovery & Performance",
     description:
-      "Skincare, wellness, and grooming products with a premium feel.",
-    hero: "Daily rituals made better.",
-    accent: "from-pink-100 to-fuchsia-50",
+      "Post-workout stacks, amino support, and hydration performance aids.",
+    hero: "Complete your stack beyond protein powder.",
+    accent: "from-violet-100 to-fuchsia-50",
   },
 ];

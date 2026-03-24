@@ -19,7 +19,7 @@ export default function PromotionalBanner() {
             </p>
             <Link
               className="inline-flex rounded-md bg-emerald-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-600"
-              to="/category/electronics"
+              to="/category/whey-isolate"
             >
               Buy now
             </Link>

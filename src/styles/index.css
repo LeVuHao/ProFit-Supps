@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap");
 @import "tailwindcss" source(none);
 @source '../**/*.{js,ts,jsx,tsx}';
 
@@ -6,8 +7,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-heading: "Trebuchet MS", "Segoe UI", sans-serif;
-  --font-body: "Segoe UI", "Arial", sans-serif;
+  --font-heading: "Sora", "Segoe UI", sans-serif;
+  --font-body: "Be Vietnam Pro", "Segoe UI", sans-serif;
   --font-size: 16px;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
@@ -134,6 +135,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
