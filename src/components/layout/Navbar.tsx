@@ -1,15 +1,17 @@
 import { Heart, ShoppingCart, User, Search } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/contact", label: "Contact" },
   { to: "/about", label: "About" },
-  { to: "/signup", label: "Sign Up" },
-  { to: "/login", label: "Login" },
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const { isAuthenticated, username, logout } = useAuth();
+
   return (
     <header className="sticky top-0 z-40 border-b border-orange-100/80 bg-white/90 backdrop-blur-xl">
       <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 px-4 py-2 text-center text-sm font-medium text-white">
@@ -52,6 +54,29 @@ export default function Navbar() {
               )}
             </NavLink>
           ))}
+          {!isAuthenticated ? (
+            <>
+              <NavLink to="/signup">Sign Up</NavLink>
+              <NavLink to="/login">Login</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/account">Account</NavLink>
+              <span className="rounded-full px-3 py-1.5 text-sm font-semibold text-zinc-700">
+                Hello, {username ?? "User"}
+              </span>
+              <button
+                type="button"
+                onClick={async () => {
+                  await logout();
+                  navigate("/");
+                }}
+                className="rounded-full px-3 py-1.5 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+              >
+                Logout
+              </button>
+            </>
+          )}
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-3 md:flex-none">
@@ -73,13 +98,15 @@ export default function Navbar() {
           >
             <ShoppingCart className="h-5 w-5" />
           </Link>
-          <Link
-            aria-label="Login"
-            className="rounded-full border border-zinc-200 bg-white p-2 text-zinc-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-orange-500 hover:text-orange-600"
-            to="/login"
-          >
-            <User className="h-5 w-5" />
-          </Link>
+          {!isAuthenticated ? (
+            <Link
+              aria-label="Login"
+              className="rounded-full border border-zinc-200 bg-white p-2 text-zinc-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-orange-500 hover:text-orange-600"
+              to="/login"
+            >
+              <User className="h-5 w-5" />
+            </Link>
+          ) : null}
         </div>
       </div>
     </header>

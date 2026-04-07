@@ -1,16 +1,84 @@
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductGrid from "../components/products/ProductGrid";
-import { formatCurrency, getProductById, products } from "../data/products";
+import {
+  formatCurrency,
+  getProductById as getLocalProductById,
+  products as localProducts,
+} from "../data/products";
+import {
+  getProductById as fetchProductById,
+  getProducts as fetchProducts,
+} from "../services/api";
+import type { Product } from "../data/products";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
-  const product = getProductById(id);
-  const hasImagePath = Boolean(
-    product?.image &&
-    (product.image.includes("/") ||
-      /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(product.image)),
-  );
+  const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadProduct = async () => {
+      if (!id) {
+        setError("Product ID is missing.");
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        const fetchedProduct = await fetchProductById(id);
+        setProduct(fetchedProduct);
+
+        const allProducts = await fetchProducts();
+        setRelatedProducts(
+          allProducts
+            .filter(
+              (item) =>
+                item.categorySlug === fetchedProduct.categorySlug &&
+                item.id !== fetchedProduct.id,
+            )
+            .slice(0, 4),
+        );
+      } catch (err: any) {
+        const fallbackProduct = getLocalProductById(id);
+        if (!fallbackProduct) {
+          setError("Product not found.");
+        } else {
+          setProduct(fallbackProduct);
+          setRelatedProducts(
+            localProducts
+              .filter(
+                (item) =>
+                  item.categorySlug === fallbackProduct.categorySlug &&
+                  item.id !== fallbackProduct.id,
+              )
+              .slice(0, 4),
+          );
+          setError(
+            "Không thể tải dữ liệu backend. Đang hiển thị dữ liệu nội bộ.",
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <section className="mx-auto w-full max-w-6xl px-4 py-16 text-center">
+        <p className="text-lg text-zinc-600">Loading product details...</p>
+      </section>
+    );
+  }
 
   if (!product) {
     return (
@@ -18,7 +86,7 @@ export default function ProductDetailPage() {
         <div className="rounded-2xl border border-dashed border-zinc-300 bg-white p-12 text-center">
           <h1 className="text-3xl font-bold text-black">Product not found</h1>
           <p className="mt-3 text-zinc-500">
-            The product you requested does not exist in the mock catalog.
+            The product you requested does not exist in the storefront.
           </p>
           <Link
             className="mt-6 inline-flex rounded-md bg-[#db4444] px-5 py-3 text-sm font-semibold text-white"
@@ -31,15 +99,15 @@ export default function ProductDetailPage() {
     );
   }
 
-  const relatedProducts = products
-    .filter(
-      (item) =>
-        item.categorySlug === product.categorySlug && item.id !== product.id,
-    )
-    .slice(0, 4);
+  const hasImagePath = Boolean(
+    product.image &&
+    (product.image.includes("/") ||
+      /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(product.image)),
+  );
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-10">
+      {error ? <p className="mb-4 text-sm text-red-600">{error}</p> : null}
       <p className="text-sm text-zinc-500">
         Home / {product.category} / {product.name}
       </p>

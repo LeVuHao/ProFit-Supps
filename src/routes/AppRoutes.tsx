@@ -1,7 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
+import RequireAuth from "../components/RequireAuth";
 import AboutPage from "../pages/AboutPage";
+import AccountPage from "../pages/AccountPage";
 import CartPage from "../pages/CartPage";
 import CategoryPage from "../pages/CategoryPage";
 import ContactPage from "../pages/ContactPage";
@@ -35,6 +37,14 @@ export default function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
+        <Route
+          path="/account"
+          element={
+            <RequireAuth>
+              <AccountPage />
+            </RequireAuth>
+          }
+        />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/category/:slug" element={<CategoryPage />} />
         <Route path="*" element={<NotFoundPage />} />
